@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apex Assessment</title>
+  <title>Apex Player Assessment</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,58 +14,71 @@
     <h1>PLAYER ASSESSMENT</h1>
 
     <p class="description">
-      Let's understand how you actually play.
+      Don't give us the answer you think a coach wants.
+      Tell us how you actually play.
     </p>
 
-    <form>
+    <form id="assessmentForm">
 
       <h2>What's your position?</h2>
 
       <label>
-        <input type="radio" name="position" value="striker">
+        <input type="radio" name="position" value="Striker" required>
         Striker
       </label>
 
       <label>
-        <input type="radio" name="position" value="winger">
+        <input type="radio" name="position" value="Winger">
         Winger
       </label>
 
       <label>
-        <input type="radio" name="position" value="midfielder">
+        <input type="radio" name="position" value="Midfielder">
         Midfielder
       </label>
 
       <label>
-        <input type="radio" name="position" value="defender">
+        <input type="radio" name="position" value="Defender">
         Defender
       </label>
 
       <h2>What's your go-to finish when you don't have time to think?</h2>
 
       <textarea
+        id="finish"
+        name="finish"
         rows="4"
+        required
         placeholder="Describe your natural finishing technique..."
       ></textarea>
 
       <h2>Where on the pitch do you feel most dangerous?</h2>
 
       <textarea
+        id="dangerZone"
+        name="dangerZone"
         rows="4"
+        required
         placeholder="For example: near post, penalty spot, edge of the box..."
       ></textarea>
 
       <h2>When a center-back is tight behind you, what's your instinct?</h2>
 
       <textarea
+        id="defender"
+        name="defender"
         rows="4"
+        required
         placeholder="Turn, hold the ball, lay it off, spin in behind..."
       ></textarea>
 
       <h2>What happens mentally after you miss a huge chance?</h2>
 
       <textarea
+        id="mental"
+        name="mental"
         rows="4"
+        required
         placeholder="Tell us honestly..."
       ></textarea>
 
@@ -74,6 +87,32 @@
     </form>
 
   </div>
+
+  <script>
+    const form = document.getElementById("assessmentForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const position =
+        document.querySelector('input[name="position"]:checked').value;
+
+      const answers = {
+        position: position,
+        finish: document.getElementById("finish").value,
+        dangerZone: document.getElementById("dangerZone").value,
+        defender: document.getElementById("defender").value,
+        mental: document.getElementById("mental").value
+      };
+
+      localStorage.setItem(
+        "apexPlayerAssessment",
+        JSON.stringify(answers)
+      );
+
+      window.location.href = "profile.html";
+    });
+  </script>
 
 </body>
 </html>
