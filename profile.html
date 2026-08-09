@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Apex Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>YOUR PLAYER PROFILE</h1>
+
+    <p class="description">
+      Here's what Apex learned from your assessment.
+    </p>
+
+    <div id="profile"></div>
+
+  </div>
+
+  <script>
+    const savedData = localStorage.getItem("apexPlayerAssessment");
+
+    const profile = document.getElementById("profile");
+
+    if (!savedData) {
+
+      profile.innerHTML = `
+        <p>No assessment found.</p>
+        <a href="assessment.html">
+          <button>TAKE ASSESSMENT</button>
+        </a>
+      `;
+
+    } else {
+
+      const data = JSON.parse(savedData);
+
+      profile.innerHTML = `
+        <h2>Position</h2>
+        <p>${data.position}</p>
+
+        <h2>Go-To Finish</h2>
+        <p>${data.finish}</p>
+
+        <h2>Danger Zone</h2>
+        <p>${data.dangerZone}</p>
+
+        <h2>Back-to-Goal Instinct</h2>
+        <p>${data.defender}</p>
+
+        <h2>Mental Response</h2>
+        <p>${data.mental}</p>
+
+        <br>
+
+        <h2>Assessment Complete</h2>
+
+        <p>
+          Apex has your answers. Next, we'll use them to build
+          your personalized player profile and training session.
+        </p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
